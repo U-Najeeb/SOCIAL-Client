@@ -1,0 +1,56 @@
+@import "./GlobalStyles.scss";
+
+.login-container {
+  width: 100vw;
+  height: 100vh;
+  @include Flex();
+  flex-direction: column;
+  gap: 75px;
+
+  .header {
+    width: 100%;
+    text-align: center;
+    @include Flex();
+    gap: 5px;
+
+    & > :nth-child(2) {
+      color: $primary;
+    }
+  }
+
+  .inputs {
+    @include Flex();
+    flex-direction: column;
+    gap: 25px;
+
+    input {
+      width: 50%;
+      padding: 20px;
+      font-size: 0.9rem;
+      border-radius: 2.5px;
+      color: $placeholder;
+      border: 2px solid $placeholder;
+    }
+  }
+
+  .button {
+    @include Flex();
+
+    button {
+      width: 35%;
+      background-color: $primary;
+      border: none;
+      color: white;
+      padding: 15px;
+      border-radius: 2.5px;
+
+      &:hover {
+        @include Hover();
+      }
+
+      &:not(:hover) {
+        @include NotHover();
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+$primary: #3369ff;
+$placeholder: #b4abab;
+
+@mixin Flex($ai: center, $jc: center) {
+  width: 100%;
+  display: flex;
+  align-items: $ai;
+  justify-content: $jc;
+}
+
+@mixin Hover() {
+  transform: scale(1.025);
+  transition: all 0.3s;
+}
+
+@mixin NotHover() {
+  transform: scale(1);
+  transition: all 0.2s;
+}
