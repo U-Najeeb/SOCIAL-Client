@@ -1,29 +1,40 @@
 import React from "react";
 import "./styles/LoginStyles.scss";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [name, setName] = React.useState<string>("");
   const [room, setRoom] = React.useState<string>("");
 
-  const HandleLogin = () => {
+  const navigate = useNavigate();
+
+  const HandleLogin: Function = () => {
     if (name.length > 2) {
       if (room.length > 2) {
-        console.log("Login successful")
+        navigate("/chatroom", {
+          state: {
+            name,
+            room,
+          },
+        });
       } else {
         alert("Provide a proper Room!");
       }
     } else {
-      alert("Provide a proper name!");
+      alert("Provide a proper Name!");
     }
   };
 
   return (
     <div className="login-container">
       <div className="header">
-        <h2>LOG INTO</h2>
-        <h2>SOCIAL</h2>
+        <h1>LOG INTO</h1>
+        <h1>SOCIAL</h1>
       </div>
-      <div className="inputs">
+      <div
+        onKeyDown={(e) => e.key === "Enter" && HandleLogin()}
+        className="inputs"
+      >
         <input
           onChange={(e) => setName(e.target.value)}
           defaultValue={name}

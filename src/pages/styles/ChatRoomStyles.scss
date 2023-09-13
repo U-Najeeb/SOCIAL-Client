@@ -1,0 +1,118 @@
+@import "./GlobalStyles.scss";
+
+.chatroom-container {
+  @include Flex();
+  flex-direction: column;
+
+  nav {
+    position: fixed;
+    top: 0;
+    background-color: $primary;
+    color: white;
+    z-index: 1;
+    @include Flex(center, space-between);
+    padding: 10px 10%;
+
+    & > h3 {
+      font-weight: 500;
+    }
+  }
+
+  .chatBody {
+    background-color: #efefef;
+    margin-top: 25px;
+    min-height: 100vh;
+    padding: 15px;
+    @include Flex(flex-start, flex-start);
+    flex-direction: column;
+    width: 75%;
+
+    @keyframes pop-in {
+      0% {
+        transform: scale(0.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .chat-pill {
+      min-width: 40%;
+      max-width: 70%;
+      padding: 10px;
+      animation: pop-in 0.2s ease-out forwards;
+
+      & > * {
+        margin: 5px 0;
+      }
+
+      h5 {
+        text-align: start;
+      }
+
+      h4 {
+        background-color: #d9d9d9;
+        border-radius: 10px;
+        padding: 10px;
+        font-weight: 500;
+      }
+
+      h6 {
+        text-align: end;
+        color: $placeholder;
+      }
+    }
+
+    .myMessage {
+      margin-left: auto;
+    }
+
+    .lastMessage {
+      margin-bottom: 100px;
+    }
+
+    .inputBox {
+      position: fixed;
+      bottom: 5vh;
+      width: 73%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      input {
+        width: 100%;
+
+        padding: 20px;
+        border: none;
+        border-radius: 5px;
+      }
+    }
+  }
+}
+
+@media screen and (orientation: portrait) {
+  .chatroom-container {
+    flex-direction: column;
+
+    nav {
+      @include Flex(flex-start);
+      flex-direction: column;
+      padding: 10px 5%;
+      gap: 10px;
+    }
+
+    .chatBody {
+      width: 100%;
+      margin-top: 100px;
+
+      .inputBox {
+        width: 92.5%;
+        bottom: 2vh;
+        input {
+          padding: 25px;
+          width: 100%;
+        }
+      }
+    }
+  }
+}

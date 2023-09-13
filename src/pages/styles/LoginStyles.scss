@@ -28,8 +28,11 @@
       padding: 20px;
       font-size: 0.9rem;
       border-radius: 2.5px;
-      color: $placeholder;
       border: 2px solid $placeholder;
+
+      &::placeholder {
+        color: $placeholder;
+      }
     }
   }
 
@@ -50,6 +53,26 @@
 
       &:not(:hover) {
         @include NotHover();
+      }
+    }
+  }
+}
+
+@media screen and (orientation: portrait) {
+  .login-container {
+    .inputs {
+      @include Flex();
+      flex-direction: column;
+      gap: 25px;
+
+      input {
+        width: 75%;
+      }
+    }
+
+    .button {
+      button {
+        width: 50%;
       }
     }
   }

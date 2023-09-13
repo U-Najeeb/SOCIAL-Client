@@ -6,8 +6,9 @@ const Splash = () => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    setInterval(() => {
+    const interval = setInterval(() => {
       navigate("login");
+      return clearInterval(interval);
     }, 2000);
   }, []);
 
