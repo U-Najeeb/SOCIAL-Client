@@ -3,27 +3,34 @@ import { useLocation } from "react-router-dom";
 import { io } from "socket.io-client";
 import "./styles/ChatRoomStyles.scss";
 import { FormatTimeAgo } from "../utils/DateFormatter";
+import { SocketRef } from "../types/SocketTypes";
+
+interface locationStateTypes {
+  name: string;
+  room: string | number;
+}
+
+interface MessageBodyTypes {
+  name: string;
+  message: string;
+  time: number;
+}
 
 const ChatRoom = () => {
   const location = useLocation();
-  const { name, room } = location.state;
+  const { name, room }: locationStateTypes = location.state;
+
+  const socketURL: string = "http://localhost:5000";
 
   const [activeUsers, setActiveUsers] = React.useState<number>(0);
   const [messageList, setMessageList] = React.useState<Array<any>>([]);
   const [message, setMessage] = React.useState<string>("");
 
-  const socket = React.useRef<any>(null);
-
-  // function ScrollToBottom() {
-  //   window.scrollTo({
-  //     top: document.body.scrollHeight,
-  //     behavior: "smooth", // You can use 'auto' for immediate scrolling
-  //   });
-  // }
+  const socket: SocketRef = React.useRef(null);
 
   const ScrollToBottom = () => {
     const scrollDelay = setInterval(() => {
-      if (messageList.length > 5) {
+      if (messageList.length > 4) {
         window.scrollTo({
           top: document.body.scrollHeight,
           behavior: "smooth",
@@ -35,12 +42,12 @@ const ChatRoom = () => {
 
   const SendMessage = () => {
     if (message?.length > 1) {
-      const messageBody = {
+      const messageBody: MessageBodyTypes = {
         name,
         message,
         time: Date.now(),
       };
-      socket.current.emit("messages", messageBody);
+      socket?.current?.emit("messages", messageBody);
       setMessageList((prevState) => [...prevState, messageBody]);
       setMessage("");
       ScrollToBottom();
@@ -51,7 +58,7 @@ const ChatRoom = () => {
 
   React.useEffect(() => {
     if (!socket.current) {
-      socket.current = io("http://localhost:5000");
+      socket.current = io(socketURL);
 
       socket.current.emit("join-room", room, name);
 
