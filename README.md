@@ -1,3 +1,13 @@
+# SOCIAL-Client
+
+## Get Started
+#### 1. Clone the repo.
+#### 2. cd into the working directory "cd ./SOCIAL-Client".
+#### 3. Run "npm i" on the terminal.
+#### 4. Run "npm run dev" on the terminal.
+#### 5. 🤷‍♂️.
+    
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
