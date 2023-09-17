@@ -20,7 +20,8 @@ const ChatRoom = () => {
   const location = useLocation();
   const { name, room }: locationStateTypes = location.state;
 
-  const socketURL: string = "http://localhost:5000";
+  // const socketURL: string = "http://localhost:5000";
+  const socketURL: string = "https://social-server-317n.onrender.com";
 
   const [activeUsers, setActiveUsers] = React.useState<number>(0);
   const [messageList, setMessageList] = React.useState<Array<any>>([]);
