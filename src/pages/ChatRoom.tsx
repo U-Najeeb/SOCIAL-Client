@@ -51,12 +51,15 @@ const ChatRoom = () => {
       socket?.current?.emit("messages", messageBody);
       setMessageList((prevState) => [...prevState, messageBody]);
       setMessage("");
-      ScrollToBottom();
     } else {
       alert("Cannot send a empty message!");
     }
   };
 
+  React.useEffect(() => {
+    ScrollToBottom();
+  }, [messageList])
+  
   React.useEffect(() => {
     if (!socket.current) {
       socket.current = io(socketURL);
@@ -69,7 +72,6 @@ const ChatRoom = () => {
 
       socket.current.on("messages", (messageBody: string) => {
         setMessageList((prevState) => [...prevState, messageBody]);
-        ScrollToBottom();
       });
     }
 
