@@ -62,7 +62,7 @@ const ChatRoom = () => {
 
   React.useEffect(() => {
     if (!socket.current) {
-      socket.current = io(socketURL);
+      socket.current = io(socketURL)
 
       socket.current.emit("join-room", room, name);
 
@@ -83,6 +83,13 @@ const ChatRoom = () => {
       }
     };
   }, [room]);
+
+
+  // OFFLINE MESSAGE
+  const isOffline = setTimeout(() => {
+    activeUsers < 1 && alert("Server is Offline! This is a P.O.C and uses free servers.")
+    return clearInterval(isOffline)
+  }, 15 * 1000)
 
   // REQS
   // Handle the Joining and leaving of a Room on the backend. DONE
