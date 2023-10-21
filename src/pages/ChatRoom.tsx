@@ -59,7 +59,7 @@ const ChatRoom = () => {
   React.useEffect(() => {
     ScrollToBottom();
   }, [messageList])
-  
+
   React.useEffect(() => {
     if (!socket.current) {
       socket.current = io(socketURL);
@@ -114,9 +114,8 @@ const ChatRoom = () => {
               return (
                 <div
                   key={message.time}
-                  className={`chat-pill ${
-                    message.name === name && "myMessage"
-                  } ${index + 1 === messageList.length && " lastMessage"}`}
+                  className={`chat-pill ${message.name === name && "myMessage"
+                    } ${index + 1 === messageList.length && " lastMessage"}`}
                 >
                   <h5>{message.name}</h5>
                   <h4>{message.message}.</h4>
