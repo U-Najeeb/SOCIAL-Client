@@ -56,6 +56,13 @@ const ChatRoom = () => {
     }
   };
 
+  const wait = (cb: () => void, time: number) => {
+    const tOut = setTimeout(() => {
+      cb()
+      return clearInterval(tOut)
+    }, time * 1000)
+  }
+
   React.useEffect(() => {
     ScrollToBottom();
   }, [messageList])
@@ -75,6 +82,60 @@ const ChatRoom = () => {
       });
     }
 
+
+    // OFFLINE MESSAGE
+    // let isOffline: any;
+    // activeUsers < 1 &&
+    //   (isOffline = setTimeout(() => {
+    //     let messageBody: MessageBodyTypes = {
+    //       name: "SOCIAL",
+    //       message: `Hi ${name}`,
+    //       time: Date.now(),
+    //     };
+    //     console.log(messageBody)
+    //     setMessageList((prevState) => [...prevState, messageBody]);
+    //     messageBody.message = "The server seems to be offline ..."
+    //     console.log(messageBody)
+    //     setMessageList((prevState) => [...prevState, messageBody]);
+    //     return clearInterval(isOffline)
+    //   }, 7 * 1000))
+
+    wait(
+      () => {
+        let messageBody: MessageBodyTypes = {
+          name: "SOCIAL",
+          message: `Hi ${name}`,
+          time: Date.now(),
+        };
+        setMessageList((prevState) => [...prevState, messageBody]);
+      },
+      6
+    )
+
+    wait(
+      () => {
+        let messageBody: MessageBodyTypes = {
+          name: "SOCIAL",
+          message: `The server seems to be offline`,
+          time: Date.now(),
+        };
+        setMessageList((prevState) => [...prevState, messageBody]);
+      },
+      8
+    )
+
+    wait(
+      () => {
+        let messageBody: MessageBodyTypes = {
+          name: "SOCIAL",
+          message: '😓',
+          time: Date.now(),
+        };
+        setMessageList((prevState) => [...prevState, messageBody]);
+      },
+      10
+    )
+
     // Clean up the socket connection when the component unmounts
     return () => {
       if (socket.current) {
@@ -84,12 +145,6 @@ const ChatRoom = () => {
     };
   }, [room]);
 
-
-  // OFFLINE MESSAGE
-  const isOffline = setTimeout(() => {
-    activeUsers < 1 && alert("Server is Offline! This is a P.O.C and uses free servers.")
-    return clearInterval(isOffline)
-  }, 15 * 1000)
 
   // REQS
   // Handle the Joining and leaving of a Room on the backend. DONE
